@@ -149,6 +149,8 @@ void display7SEG(int cnt){
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	HAL_GPIO_WritePin(en0_GPIO_Port, en0_Pin, SET);
+	HAL_GPIO_WritePin(en1_GPIO_Port, en1_Pin, RESET);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
