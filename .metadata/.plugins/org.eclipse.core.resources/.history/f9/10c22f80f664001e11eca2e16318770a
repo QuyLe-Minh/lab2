@@ -194,32 +194,32 @@ int main(void)
 	  case 0:
 		  display7SEG(1);
 		  if (timer1_flag){
-			  HAL_GPIO_WritePin(en0_GPIO_Port, en0_Pin, SET);
-			  HAL_GPIO_WritePin(en1_GPIO_Port, en1_Pin, RESET);
+			  HAL_GPIO_TogglePin(en0_GPIO_Port, en0_Pin);
+			  HAL_GPIO_TogglePin(en1_GPIO_Port, en1_Pin);
 			  status = 1;
 			  setTimer1(50);
 		  }break;
 	  case 1:
 		  display7SEG(2);
 		  if (timer1_flag){
-			  HAL_GPIO_WritePin(en1_GPIO_Port, en1_Pin, SET);
-			  HAL_GPIO_WritePin(en2_GPIO_Port, en2_Pin, RESET);
+			  HAL_GPIO_TogglePin(en2_GPIO_Port, en2_Pin);
+			  HAL_GPIO_TogglePin(en1_GPIO_Port, en1_Pin);
 			  status = 2;
 			  setTimer1(50);
 		  }break;
 	  case 2:
 		  display7SEG(3);
 		  if (timer1_flag){
-			  HAL_GPIO_WritePin(en2_GPIO_Port, en2_Pin, SET);
-			  HAL_GPIO_WritePin(en3_GPIO_Port, en3_Pin, RESET);
+			  HAL_GPIO_TogglePin(en2_GPIO_Port, en2_Pin);
+			  HAL_GPIO_TogglePin(en3_GPIO_Port, en3_Pin);
 			  status = 3;
 			  setTimer1(50);
 		  }break;
 	  case 3:
 		  display7SEG(0);
 		  if (timer1_flag){
-			  HAL_GPIO_WritePin(en3_GPIO_Port, en3_Pin, SET);
-			  HAL_GPIO_WritePin(en0_GPIO_Port, en0_Pin, RESET);
+			  HAL_GPIO_TogglePin(en0_GPIO_Port, en0_Pin);
+			  HAL_GPIO_TogglePin(en3_GPIO_Port, en3_Pin);
 			  status = 0;
 			  setTimer1(50);
 		  }break;
