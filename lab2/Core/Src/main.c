@@ -143,7 +143,7 @@ void display7SEG(int cnt){
 const int MAX_LED = 4;
 int id_led = 0;
 int led_buffer[4] = {1,2,3,4};
-int hr = 15, min = 8, sec = 50;
+int hr = 7, min = 30, sec = 0;
 void update7SEG(int id){
 	id = id % MAX_LED;
 	switch(id){
@@ -184,7 +184,7 @@ void updateClockBuffer(){
 
 const int MAX_LED_MATRIX = 8;
 int index_led_matrix = 0;
-uint8_t matrix_buffer[8] = {0x00, 0x7F, 0x88, 0x88, 0x88, 0x88, 0x7F, 0x00};	//display A
+uint8_t matrix_buffer[8] = {0x3F, 0x7F, 0xCC, 0xCC, 0xCC, 0xCC, 0x7F, 0x3F};	//display A
 uint16_t col[8] = {enm0_Pin, enm1_Pin, enm2_Pin, enm3_Pin, enm4_Pin, enm5_Pin, enm6_Pin, enm7_Pin};
 uint16_t row[8] = {row0_Pin, row1_Pin, row2_Pin, row3_Pin, row4_Pin, row5_Pin, row6_Pin, row7_Pin};
 void clearLEDMatrix(){
@@ -194,14 +194,17 @@ void clearLEDMatrix(){
 	}
 }
 void displayRow(uint8_t bits){
-	for (int i = 0; i < MAX_LED_MATRIX; i++){
-		uint8_t new_bits = bits >> i;
-		if (new_bits & 1) HAL_GPIO_WritePin(GPIOB, row[i], RESET);
-	}
+	if ((bits >> 0) & 1) HAL_GPIO_WritePin(GPIOB, row[0], RESET);
+	if ((bits >> 1) & 1) HAL_GPIO_WritePin(GPIOB, row[1], RESET);
+	if ((bits >> 2) & 1) HAL_GPIO_WritePin(GPIOB, row[2], RESET);
+	if ((bits >> 3) & 1) HAL_GPIO_WritePin(GPIOB, row[3], RESET);
+	if ((bits >> 4) & 1) HAL_GPIO_WritePin(GPIOB, row[4], RESET);
+	if ((bits >> 5) & 1) HAL_GPIO_WritePin(GPIOB, row[5], RESET);
+	if ((bits >> 6) & 1) HAL_GPIO_WritePin(GPIOB, row[6], RESET);
+	if ((bits >> 7) & 1) HAL_GPIO_WritePin(GPIOB, row[7], RESET);
 }
 void updateLEDMatrix(int id){
 	clearLEDMatrix();
-	id = id%MAX_LED_MATRIX;
 	HAL_GPIO_WritePin(GPIOA, col[id], RESET);
 	displayRow(matrix_buffer[id]);
 }
@@ -224,10 +227,10 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  setTimer1(25);
-  setTimer2(100);
-  display7SEG(1);
-  setTimer3(10);
+  //T = 0.1ms
+  setTimer1(2500);
+  setTimer2(10000);
+  setTimer3(20);
   updateClockBuffer();
   /* USER CODE END Init */
 
@@ -251,7 +254,7 @@ int main(void)
   while (1)
   {
 	  if (timer2_flag == 1){
-		  setTimer2(100);
+		  setTimer2(10000);
 		  sec++;
 		  if (sec >= 60){
 			  sec = 0;
@@ -262,13 +265,14 @@ int main(void)
 		  }if (hr >= 24) hr = 0;
 		  updateClockBuffer();
 		  HAL_GPIO_TogglePin(dot_GPIO_Port, dot_Pin);
+		  HAL_GPIO_TogglePin(red_GPIO_Port, red_Pin);
 	  }if (timer1_flag == 1){
-		  setTimer1(25);
+		  setTimer1(2500);
 		  update7SEG(id_led++);
 		  id_led %= MAX_LED;
 	  }
 	  if (timer3_flag){
-		  setTimer3(10);
+		  setTimer3(500);
 		  updateLEDMatrix(index_led_matrix++);
 		  index_led_matrix%=MAX_LED_MATRIX;
 	  }
@@ -334,7 +338,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 7999;
+  htim2.Init.Prescaler = 79;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 9;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -382,13 +386,13 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, en1_Pin|en2_Pin|en3_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(a_GPIO_Port, a_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, a_Pin|row2_Pin|row3_Pin|row4_Pin
+                          |row5_Pin|row6_Pin|row7_Pin|row0_Pin
+                          |row1_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, b_Pin|c_Pin|row2_Pin|row3_Pin
-                          |row4_Pin|row5_Pin|row6_Pin|row7_Pin
-                          |d_Pin|e_Pin|f_Pin|g_Pin
-                          |row0_Pin|row1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, b_Pin|c_Pin|d_Pin|e_Pin
+                          |f_Pin|g_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : enm0_Pin enm1_Pin dot_Pin red_Pin
                            en0_Pin en1_Pin en2_Pin en3_Pin
