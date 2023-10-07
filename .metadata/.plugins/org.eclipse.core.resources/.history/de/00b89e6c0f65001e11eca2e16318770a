@@ -230,6 +230,7 @@ int main(void)
   /* USER CODE BEGIN Init */
   setTimer1(25);
   setTimer2(100);
+  display7SEG(1);
   setTimer3(1);
   updateClockBuffer();
   /* USER CODE END Init */

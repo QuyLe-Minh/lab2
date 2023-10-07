@@ -895,156 +895,156 @@ int main(void)
   setTimer2(100);
  800072a:	2064      	movs	r0, #100	; 0x64
  800072c:	f000 f9a2 	bl	8000a74 <setTimer2>
-  display7SEG(1);
- 8000730:	2001      	movs	r0, #1
- 8000732:	f7ff fd0b 	bl	800014c <display7SEG>
   setTimer3(1);
- 8000736:	2001      	movs	r0, #1
- 8000738:	f000 f9b0 	bl	8000a9c <setTimer3>
+ 8000730:	2001      	movs	r0, #1
+ 8000732:	f000 f9b3 	bl	8000a9c <setTimer3>
   updateClockBuffer();
- 800073c:	f7ff ff10 	bl	8000560 <updateClockBuffer>
+ 8000736:	f7ff ff13 	bl	8000560 <updateClockBuffer>
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
- 8000740:	f000 f884 	bl	800084c <SystemClock_Config>
+ 800073a:	f000 f887 	bl	800084c <SystemClock_Config>
 
   /* USER CODE BEGIN SysInit */
   MX_GPIO_Init();
- 8000744:	f000 f90a 	bl	800095c <MX_GPIO_Init>
+ 800073e:	f000 f90d 	bl	800095c <MX_GPIO_Init>
   MX_TIM2_Init();
- 8000748:	f000 f8bc 	bl	80008c4 <MX_TIM2_Init>
+ 8000742:	f000 f8bf 	bl	80008c4 <MX_TIM2_Init>
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_TIM2_Init();
- 800074c:	f000 f8ba 	bl	80008c4 <MX_TIM2_Init>
+ 8000746:	f000 f8bd 	bl	80008c4 <MX_TIM2_Init>
   MX_GPIO_Init();
- 8000750:	f000 f904 	bl	800095c <MX_GPIO_Init>
+ 800074a:	f000 f907 	bl	800095c <MX_GPIO_Init>
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT (& htim2 ) ;
- 8000754:	4833      	ldr	r0, [pc, #204]	; (8000824 <main+0x108>)
- 8000756:	f001 f9f3 	bl	8001b40 <HAL_TIM_Base_Start_IT>
+ 800074e:	4835      	ldr	r0, [pc, #212]	; (8000824 <main+0x108>)
+ 8000750:	f001 f9f6 	bl	8001b40 <HAL_TIM_Base_Start_IT>
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
 	  if (timer2_flag == 1){
- 800075a:	4b33      	ldr	r3, [pc, #204]	; (8000828 <main+0x10c>)
- 800075c:	681b      	ldr	r3, [r3, #0]
- 800075e:	2b01      	cmp	r3, #1
- 8000760:	d12c      	bne.n	80007bc <main+0xa0>
+ 8000754:	4b34      	ldr	r3, [pc, #208]	; (8000828 <main+0x10c>)
+ 8000756:	681b      	ldr	r3, [r3, #0]
+ 8000758:	2b01      	cmp	r3, #1
+ 800075a:	d130      	bne.n	80007be <main+0xa2>
 		  setTimer2(100);
- 8000762:	2064      	movs	r0, #100	; 0x64
- 8000764:	f000 f986 	bl	8000a74 <setTimer2>
+ 800075c:	2064      	movs	r0, #100	; 0x64
+ 800075e:	f000 f989 	bl	8000a74 <setTimer2>
 		  sec++;
- 8000768:	4b30      	ldr	r3, [pc, #192]	; (800082c <main+0x110>)
- 800076a:	681b      	ldr	r3, [r3, #0]
- 800076c:	3301      	adds	r3, #1
- 800076e:	4a2f      	ldr	r2, [pc, #188]	; (800082c <main+0x110>)
- 8000770:	6013      	str	r3, [r2, #0]
+ 8000762:	4b32      	ldr	r3, [pc, #200]	; (800082c <main+0x110>)
+ 8000764:	681b      	ldr	r3, [r3, #0]
+ 8000766:	3301      	adds	r3, #1
+ 8000768:	4a30      	ldr	r2, [pc, #192]	; (800082c <main+0x110>)
+ 800076a:	6013      	str	r3, [r2, #0]
 		  if (sec >= 60){
- 8000772:	4b2e      	ldr	r3, [pc, #184]	; (800082c <main+0x110>)
- 8000774:	681b      	ldr	r3, [r3, #0]
- 8000776:	2b3b      	cmp	r3, #59	; 0x3b
- 8000778:	dd07      	ble.n	800078a <main+0x6e>
+ 800076c:	4b2f      	ldr	r3, [pc, #188]	; (800082c <main+0x110>)
+ 800076e:	681b      	ldr	r3, [r3, #0]
+ 8000770:	2b3b      	cmp	r3, #59	; 0x3b
+ 8000772:	dd07      	ble.n	8000784 <main+0x68>
 			  sec = 0;
- 800077a:	4b2c      	ldr	r3, [pc, #176]	; (800082c <main+0x110>)
- 800077c:	2200      	movs	r2, #0
- 800077e:	601a      	str	r2, [r3, #0]
+ 8000774:	4b2d      	ldr	r3, [pc, #180]	; (800082c <main+0x110>)
+ 8000776:	2200      	movs	r2, #0
+ 8000778:	601a      	str	r2, [r3, #0]
 			  min++;
- 8000780:	4b2b      	ldr	r3, [pc, #172]	; (8000830 <main+0x114>)
- 8000782:	681b      	ldr	r3, [r3, #0]
- 8000784:	3301      	adds	r3, #1
- 8000786:	4a2a      	ldr	r2, [pc, #168]	; (8000830 <main+0x114>)
- 8000788:	6013      	str	r3, [r2, #0]
+ 800077a:	4b2d      	ldr	r3, [pc, #180]	; (8000830 <main+0x114>)
+ 800077c:	681b      	ldr	r3, [r3, #0]
+ 800077e:	3301      	adds	r3, #1
+ 8000780:	4a2b      	ldr	r2, [pc, #172]	; (8000830 <main+0x114>)
+ 8000782:	6013      	str	r3, [r2, #0]
 		  }if (min >= 60){
- 800078a:	4b29      	ldr	r3, [pc, #164]	; (8000830 <main+0x114>)
- 800078c:	681b      	ldr	r3, [r3, #0]
- 800078e:	2b3b      	cmp	r3, #59	; 0x3b
- 8000790:	dd07      	ble.n	80007a2 <main+0x86>
+ 8000784:	4b2a      	ldr	r3, [pc, #168]	; (8000830 <main+0x114>)
+ 8000786:	681b      	ldr	r3, [r3, #0]
+ 8000788:	2b3b      	cmp	r3, #59	; 0x3b
+ 800078a:	dd07      	ble.n	800079c <main+0x80>
 			  hr++;
- 8000792:	4b28      	ldr	r3, [pc, #160]	; (8000834 <main+0x118>)
- 8000794:	681b      	ldr	r3, [r3, #0]
- 8000796:	3301      	adds	r3, #1
- 8000798:	4a26      	ldr	r2, [pc, #152]	; (8000834 <main+0x118>)
- 800079a:	6013      	str	r3, [r2, #0]
+ 800078c:	4b29      	ldr	r3, [pc, #164]	; (8000834 <main+0x118>)
+ 800078e:	681b      	ldr	r3, [r3, #0]
+ 8000790:	3301      	adds	r3, #1
+ 8000792:	4a28      	ldr	r2, [pc, #160]	; (8000834 <main+0x118>)
+ 8000794:	6013      	str	r3, [r2, #0]
 			  min = 0;
- 800079c:	4b24      	ldr	r3, [pc, #144]	; (8000830 <main+0x114>)
- 800079e:	2200      	movs	r2, #0
- 80007a0:	601a      	str	r2, [r3, #0]
+ 8000796:	4b26      	ldr	r3, [pc, #152]	; (8000830 <main+0x114>)
+ 8000798:	2200      	movs	r2, #0
+ 800079a:	601a      	str	r2, [r3, #0]
 		  }if (hr >= 24) hr = 0;
- 80007a2:	4b24      	ldr	r3, [pc, #144]	; (8000834 <main+0x118>)
- 80007a4:	681b      	ldr	r3, [r3, #0]
- 80007a6:	2b17      	cmp	r3, #23
- 80007a8:	dd02      	ble.n	80007b0 <main+0x94>
- 80007aa:	4b22      	ldr	r3, [pc, #136]	; (8000834 <main+0x118>)
- 80007ac:	2200      	movs	r2, #0
- 80007ae:	601a      	str	r2, [r3, #0]
+ 800079c:	4b25      	ldr	r3, [pc, #148]	; (8000834 <main+0x118>)
+ 800079e:	681b      	ldr	r3, [r3, #0]
+ 80007a0:	2b17      	cmp	r3, #23
+ 80007a2:	dd02      	ble.n	80007aa <main+0x8e>
+ 80007a4:	4b23      	ldr	r3, [pc, #140]	; (8000834 <main+0x118>)
+ 80007a6:	2200      	movs	r2, #0
+ 80007a8:	601a      	str	r2, [r3, #0]
 		  updateClockBuffer();
- 80007b0:	f7ff fed6 	bl	8000560 <updateClockBuffer>
+ 80007aa:	f7ff fed9 	bl	8000560 <updateClockBuffer>
 		  HAL_GPIO_TogglePin(dot_GPIO_Port, dot_Pin);
- 80007b4:	2110      	movs	r1, #16
- 80007b6:	4820      	ldr	r0, [pc, #128]	; (8000838 <main+0x11c>)
- 80007b8:	f000 fd7c 	bl	80012b4 <HAL_GPIO_TogglePin>
+ 80007ae:	2110      	movs	r1, #16
+ 80007b0:	4821      	ldr	r0, [pc, #132]	; (8000838 <main+0x11c>)
+ 80007b2:	f000 fd7f 	bl	80012b4 <HAL_GPIO_TogglePin>
+		  HAL_GPIO_TogglePin(red_GPIO_Port, red_Pin);
+ 80007b6:	2120      	movs	r1, #32
+ 80007b8:	481f      	ldr	r0, [pc, #124]	; (8000838 <main+0x11c>)
+ 80007ba:	f000 fd7b 	bl	80012b4 <HAL_GPIO_TogglePin>
 	  }if (timer1_flag == 1){
- 80007bc:	4b1f      	ldr	r3, [pc, #124]	; (800083c <main+0x120>)
- 80007be:	681b      	ldr	r3, [r3, #0]
- 80007c0:	2b01      	cmp	r3, #1
- 80007c2:	d114      	bne.n	80007ee <main+0xd2>
+ 80007be:	4b1f      	ldr	r3, [pc, #124]	; (800083c <main+0x120>)
+ 80007c0:	681b      	ldr	r3, [r3, #0]
+ 80007c2:	2b01      	cmp	r3, #1
+ 80007c4:	d114      	bne.n	80007f0 <main+0xd4>
 		  setTimer1(25);
- 80007c4:	2019      	movs	r0, #25
- 80007c6:	f000 f941 	bl	8000a4c <setTimer1>
+ 80007c6:	2019      	movs	r0, #25
+ 80007c8:	f000 f940 	bl	8000a4c <setTimer1>
 		  update7SEG(id_led++);
- 80007ca:	4b1d      	ldr	r3, [pc, #116]	; (8000840 <main+0x124>)
- 80007cc:	681b      	ldr	r3, [r3, #0]
- 80007ce:	1c5a      	adds	r2, r3, #1
- 80007d0:	491b      	ldr	r1, [pc, #108]	; (8000840 <main+0x124>)
- 80007d2:	600a      	str	r2, [r1, #0]
- 80007d4:	4618      	mov	r0, r3
- 80007d6:	f7ff fe45 	bl	8000464 <update7SEG>
+ 80007cc:	4b1c      	ldr	r3, [pc, #112]	; (8000840 <main+0x124>)
+ 80007ce:	681b      	ldr	r3, [r3, #0]
+ 80007d0:	1c5a      	adds	r2, r3, #1
+ 80007d2:	491b      	ldr	r1, [pc, #108]	; (8000840 <main+0x124>)
+ 80007d4:	600a      	str	r2, [r1, #0]
+ 80007d6:	4618      	mov	r0, r3
+ 80007d8:	f7ff fe44 	bl	8000464 <update7SEG>
 		  id_led %= MAX_LED;
- 80007da:	4b19      	ldr	r3, [pc, #100]	; (8000840 <main+0x124>)
- 80007dc:	681b      	ldr	r3, [r3, #0]
- 80007de:	2204      	movs	r2, #4
- 80007e0:	fb93 f1f2 	sdiv	r1, r3, r2
- 80007e4:	fb02 f201 	mul.w	r2, r2, r1
- 80007e8:	1a9b      	subs	r3, r3, r2
- 80007ea:	4a15      	ldr	r2, [pc, #84]	; (8000840 <main+0x124>)
- 80007ec:	6013      	str	r3, [r2, #0]
+ 80007dc:	4b18      	ldr	r3, [pc, #96]	; (8000840 <main+0x124>)
+ 80007de:	681b      	ldr	r3, [r3, #0]
+ 80007e0:	2204      	movs	r2, #4
+ 80007e2:	fb93 f1f2 	sdiv	r1, r3, r2
+ 80007e6:	fb02 f201 	mul.w	r2, r2, r1
+ 80007ea:	1a9b      	subs	r3, r3, r2
+ 80007ec:	4a14      	ldr	r2, [pc, #80]	; (8000840 <main+0x124>)
+ 80007ee:	6013      	str	r3, [r2, #0]
 	  }
 	  if (timer3_flag){
- 80007ee:	4b15      	ldr	r3, [pc, #84]	; (8000844 <main+0x128>)
- 80007f0:	681b      	ldr	r3, [r3, #0]
- 80007f2:	2b00      	cmp	r3, #0
- 80007f4:	d0b1      	beq.n	800075a <main+0x3e>
+ 80007f0:	4b14      	ldr	r3, [pc, #80]	; (8000844 <main+0x128>)
+ 80007f2:	681b      	ldr	r3, [r3, #0]
+ 80007f4:	2b00      	cmp	r3, #0
+ 80007f6:	d0ad      	beq.n	8000754 <main+0x38>
 		  setTimer3(1);
- 80007f6:	2001      	movs	r0, #1
- 80007f8:	f000 f950 	bl	8000a9c <setTimer3>
+ 80007f8:	2001      	movs	r0, #1
+ 80007fa:	f000 f94f 	bl	8000a9c <setTimer3>
 		  updateLEDMatrix(index_led_matrix++);
- 80007fc:	4b12      	ldr	r3, [pc, #72]	; (8000848 <main+0x12c>)
- 80007fe:	681b      	ldr	r3, [r3, #0]
- 8000800:	1c5a      	adds	r2, r3, #1
- 8000802:	4911      	ldr	r1, [pc, #68]	; (8000848 <main+0x12c>)
- 8000804:	600a      	str	r2, [r1, #0]
- 8000806:	4618      	mov	r0, r3
- 8000808:	f7ff ff68 	bl	80006dc <updateLEDMatrix>
+ 80007fe:	4b12      	ldr	r3, [pc, #72]	; (8000848 <main+0x12c>)
+ 8000800:	681b      	ldr	r3, [r3, #0]
+ 8000802:	1c5a      	adds	r2, r3, #1
+ 8000804:	4910      	ldr	r1, [pc, #64]	; (8000848 <main+0x12c>)
+ 8000806:	600a      	str	r2, [r1, #0]
+ 8000808:	4618      	mov	r0, r3
+ 800080a:	f7ff ff67 	bl	80006dc <updateLEDMatrix>
 		  if (index_led_matrix >= MAX_LED_MATRIX){
- 800080c:	4b0e      	ldr	r3, [pc, #56]	; (8000848 <main+0x12c>)
- 800080e:	681b      	ldr	r3, [r3, #0]
- 8000810:	2208      	movs	r2, #8
- 8000812:	4293      	cmp	r3, r2
- 8000814:	dba1      	blt.n	800075a <main+0x3e>
+ 800080e:	4b0e      	ldr	r3, [pc, #56]	; (8000848 <main+0x12c>)
+ 8000810:	681b      	ldr	r3, [r3, #0]
+ 8000812:	2208      	movs	r2, #8
+ 8000814:	4293      	cmp	r3, r2
+ 8000816:	db9d      	blt.n	8000754 <main+0x38>
 			  shiftLeft();
- 8000816:	f7ff ff3b 	bl	8000690 <shiftLeft>
+ 8000818:	f7ff ff3a 	bl	8000690 <shiftLeft>
 			  index_led_matrix = 0;
- 800081a:	4b0b      	ldr	r3, [pc, #44]	; (8000848 <main+0x12c>)
- 800081c:	2200      	movs	r2, #0
- 800081e:	601a      	str	r2, [r3, #0]
+ 800081c:	4b0a      	ldr	r3, [pc, #40]	; (8000848 <main+0x12c>)
+ 800081e:	2200      	movs	r2, #0
+ 8000820:	601a      	str	r2, [r3, #0]
 	  if (timer2_flag == 1){
- 8000820:	e79b      	b.n	800075a <main+0x3e>
- 8000822:	bf00      	nop
+ 8000822:	e797      	b.n	8000754 <main+0x38>
  8000824:	2000008c 	.word	0x2000008c
  8000828:	20000080 	.word	0x20000080
  800082c:	20000018 	.word	0x20000018
