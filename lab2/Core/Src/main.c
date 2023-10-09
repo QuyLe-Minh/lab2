@@ -134,8 +134,8 @@ TIM_HandleTypeDef htim2;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MX_TIM2_Init(void);
 static void MX_GPIO_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -175,8 +175,8 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_TIM2_Init();
   MX_GPIO_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT (& htim2 ) ;
   /* USER CODE END 2 */
@@ -326,34 +326,43 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, dot_Pin|en0_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, enm0_Pin|enm1_Pin|dot_Pin|red_Pin
+                          |en0_Pin|enm2_Pin|enm3_Pin|enm4_Pin
+                          |enm5_Pin|enm6_Pin|enm7_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, en1_Pin|en2_Pin|en3_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, a_Pin|b_Pin|c_Pin|d_Pin
-                          |e_Pin|f_Pin|g_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, a_Pin|row2_Pin|row3_Pin|row4_Pin
+                          |row5_Pin|row6_Pin|row7_Pin|row0_Pin
+                          |row1_Pin, GPIO_PIN_SET);
 
-  /*Configure GPIO pins : dot_Pin en0_Pin en1_Pin en2_Pin
-                           en3_Pin */
-  GPIO_InitStruct.Pin = dot_Pin|en0_Pin|en1_Pin|en2_Pin
-                          |en3_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, b_Pin|c_Pin|d_Pin|e_Pin
+                          |f_Pin|g_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : enm0_Pin enm1_Pin dot_Pin red_Pin
+                           en0_Pin en1_Pin en2_Pin en3_Pin
+                           enm2_Pin enm3_Pin enm4_Pin enm5_Pin
+                           enm6_Pin enm7_Pin */
+  GPIO_InitStruct.Pin = enm0_Pin|enm1_Pin|dot_Pin|red_Pin
+                          |en0_Pin|en1_Pin|en2_Pin|en3_Pin
+                          |enm2_Pin|enm3_Pin|enm4_Pin|enm5_Pin
+                          |enm6_Pin|enm7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PA5 */
-  GPIO_InitStruct.Pin = GPIO_PIN_5;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : a_Pin b_Pin c_Pin d_Pin
-                           e_Pin f_Pin g_Pin */
-  GPIO_InitStruct.Pin = a_Pin|b_Pin|c_Pin|d_Pin
-                          |e_Pin|f_Pin|g_Pin;
+  /*Configure GPIO pins : a_Pin b_Pin c_Pin row2_Pin
+                           row3_Pin row4_Pin row5_Pin row6_Pin
+                           row7_Pin d_Pin e_Pin f_Pin
+                           g_Pin row0_Pin row1_Pin */
+  GPIO_InitStruct.Pin = a_Pin|b_Pin|c_Pin|row2_Pin
+                          |row3_Pin|row4_Pin|row5_Pin|row6_Pin
+                          |row7_Pin|d_Pin|e_Pin|f_Pin
+                          |g_Pin|row0_Pin|row1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
